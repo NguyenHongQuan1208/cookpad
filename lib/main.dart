@@ -1,3 +1,4 @@
+import 'package:cooking_pad/themeColors/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'navigation/app_router.dart';
@@ -15,7 +16,49 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'Flutter App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        colorScheme: ColorScheme(
+          primary: ThemeColors.lightPrimaryColor,
+          primaryContainer: ThemeColors.lightPrimaryVariant,
+          secondary: ThemeColors.lightSecondaryColor,
+          secondaryContainer: ThemeColors.lightSecondaryVariant,
+          surface: ThemeColors.lightBackgroundColor,
+          error: ThemeColors.lightErrorColor,
+          onPrimary: Colors.white,
+          onSecondary: Colors.black,
+          onSurface: ThemeColors.lightTextPrimary,
+          onError: Colors.white,
+          brightness: Brightness.light,
+        ),
+        scaffoldBackgroundColor: ThemeColors.lightBackgroundColor,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: ThemeColors.lightTextPrimary),
+          bodyMedium: TextStyle(color: ThemeColors.lightTextPrimary),
+          bodySmall: TextStyle(color: ThemeColors.lightTextSecondary),
+        ),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme(
+          primary: ThemeColors.darkPrimaryColor,
+          primaryContainer: ThemeColors.darkPrimaryVariant,
+          secondary: ThemeColors.darkSecondaryColor,
+          secondaryContainer: ThemeColors.darkSecondaryVariant,
+          surface: ThemeColors.darkBackgroundColor,
+          error: ThemeColors.darkErrorColor,
+          onPrimary: Colors.white,
+          onSecondary: Colors.black,
+          onSurface: ThemeColors.darkTextPrimary,
+          onError: Colors.white,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: ThemeColors.darkBackgroundColor,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: ThemeColors.darkTextPrimary),
+          bodyMedium: TextStyle(color: ThemeColors.darkTextPrimary),
+          bodySmall: TextStyle(color: ThemeColors.darkTextSecondary),
+        ),
+      ),
+      themeMode: ThemeMode.system,
     );
   }
 }
