@@ -7,19 +7,37 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
 
-class SignInScreen extends ConsumerWidget {
+class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends ConsumerState<SignInScreen> {
+  final _formKey = GlobalKey<FormBuilderState>();
+  bool _obscureText = true;
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    // final textTheme = theme.textTheme;
-
-    final formKey = GlobalKey<FormBuilderState>();
-
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Đăng nhập')),
@@ -30,7 +48,7 @@ class SignInScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: FormBuilder(
-                key: formKey,
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -41,6 +59,7 @@ class SignInScreen extends ConsumerWidget {
                       height: context.h(150),
                     ),
                     SizedBox(height: context.h(20)),
+                    // Email Input
                     FormBuilderTextField(
                       name: 'email',
                       controller: emailController,
@@ -49,11 +68,14 @@ class SignInScreen extends ConsumerWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        icon: const Icon(Icons.email, color: Colors.black),
+                        prefixIcon: const Icon(
+                          Icons.email,
+                          color: Colors.black,
+                        ),
                         errorStyle: const TextStyle(color: Colors.red),
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autovalidateMode: AutovalidateMode.onUnfocus,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                           errorText: 'Email không được để trống',
@@ -63,7 +85,7 @@ class SignInScreen extends ConsumerWidget {
                         ),
                       ]),
                       onChanged: (value) {
-                        // Nếu cần xử lý thay đổi giá trị, thêm logic ở đây
+                        _formKey.currentState?.fields['email']?.validate();
                       },
                     ),
                     SizedBox(height: context.h(16)),
@@ -75,28 +97,44 @@ class SignInScreen extends ConsumerWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        icon: const Icon(Icons.lock, color: Colors.black),
+                        prefixIcon: const Icon(Icons.lock, color: Colors.black),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        ),
                         errorStyle: const TextStyle(color: Colors.red),
                       ),
-                      obscureText: true,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      obscureText: _obscureText,
+                      autovalidateMode: AutovalidateMode.onUnfocus,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                           errorText: 'Password không được để trống',
                         ),
                         FormBuilderValidators.minLength(
-                          9,
-                          errorText: 'Password phải có ít nhất 9 ký tự',
+                          8,
+                          errorText: 'Password phải có ít nhất 8 ký tự',
                         ),
                       ]),
+                      onChanged: (value) {
+                        _formKey.currentState?.fields['password']?.validate();
+                      },
                     ),
                     SizedBox(height: context.h(24)),
                     // Sign-In Button
                     ElevatedButton(
                       onPressed: () {
-                        if (formKey.currentState?.saveAndValidate() ?? false) {
+                        if (_formKey.currentState?.saveAndValidate() ?? false) {
                           final email =
-                              formKey.currentState?.fields['email']?.value;
+                              _formKey.currentState?.fields['email']?.value;
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
