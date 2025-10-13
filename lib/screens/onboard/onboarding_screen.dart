@@ -26,13 +26,12 @@ class OnboardScreen extends StatelessWidget {
 
           SizedBox(height: context.h(50)),
 
-          // Using horizontal scaling for padding
           Padding(
             padding: EdgeInsets.symmetric(horizontal: context.w(30)),
             child: Text(
               'Chào mừng bạn đến với Cookpad!',
               style: textTheme.bodyLarge?.copyWith(
-                fontSize: context.font(26), // Using font scaling
+                fontSize: context.font(26),
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.left,

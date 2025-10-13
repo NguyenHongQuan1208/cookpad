@@ -71,7 +71,7 @@ final GoRouter router = GoRouter(
     // ),
     GoRoute(
       path: Routes.signin,
-      pageBuilder: (context, state) => state.slidePage(const SignInScreen()),
+      pageBuilder: (context, state) => state.slidePage(SignInScreen()),
     ),
     GoRoute(
       path: Routes.register,
