@@ -3,7 +3,7 @@ class Routes {
 
   static const splash = '/';
   static const register = '/register';
-  static const login = '/login';
+  static const signin = '/signin';
   static const otp = '/otp';
   static const onboarding = '/onboarding';
   static const main = '/main';

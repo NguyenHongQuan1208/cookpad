@@ -1,14 +1,10 @@
 // File: lib/navigation/app_router.dart
 
+import 'package:cooking_pad/screens/onboard/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-// import '../features/authentication/ui/otp_screen.dart';
-
 import 'package:cooking_pad/screens/sign_In/sign_in_screen.dart';
 import 'package:cooking_pad/screens/register/register_screen.dart';
-// import '../features/main/ui/main_screen.dart';
-// import '../features/onboarding/ui/onboarding_screen.dart';
 // import '../features/onboarding/ui/splash_screen.dart';
 import 'route_names.dart';
 
@@ -63,14 +59,18 @@ class SlideRouteTransition extends CustomTransitionPage<void> {
 }
 
 final GoRouter router = GoRouter(
-  initialLocation: Routes.login,
+  initialLocation: Routes.onboarding,
   routes: [
+    GoRoute(
+      path: Routes.onboarding,
+      pageBuilder: (context, state) => state.slidePage(const OnboardScreen()),
+    ),
     // GoRoute(
     //   path: Routes.splash,
     //   pageBuilder: (context, state) => state.slidePage(const SplashScreen()),
     // ),
     GoRoute(
-      path: Routes.login,
+      path: Routes.signin,
       pageBuilder: (context, state) => state.slidePage(const SignInScreen()),
     ),
     GoRoute(
@@ -88,11 +88,6 @@ final GoRouter router = GoRouter(
     //       ),
     //     );
     //   },
-    // ),
-    // GoRoute(
-    //   path: Routes.onboarding,
-    //   pageBuilder: (context, state) =>
-    //       state.slidePage(const OnboardingScreen()),
     // ),
     // GoRoute(
     //   path: Routes.main,
