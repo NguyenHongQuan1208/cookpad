@@ -53,6 +53,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        scrolledUnderElevation: 0,
       ),
       body: FocusScope(
         child: GestureDetector(

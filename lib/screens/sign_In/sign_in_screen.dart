@@ -45,6 +45,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           'Đăng nhập',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        scrolledUnderElevation: 0,
       ),
       body: FocusScope(
         child: GestureDetector(
