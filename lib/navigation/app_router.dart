@@ -1,5 +1,6 @@
 // File: lib/navigation/app_router.dart
 
+import 'package:cooking_pad/screens/home/home_screen.dart';
 import 'package:cooking_pad/screens/onboard/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -69,6 +70,10 @@ final GoRouter router = GoRouter(
     //   path: Routes.splash,
     //   pageBuilder: (context, state) => state.slidePage(const SplashScreen()),
     // ),
+    GoRoute(
+      path: Routes.home,
+      pageBuilder: (context, state) => state.slidePage(HomeScreen()),
+    ),
     GoRoute(
       path: Routes.signin,
       pageBuilder: (context, state) => state.slidePage(SignInScreen()),
