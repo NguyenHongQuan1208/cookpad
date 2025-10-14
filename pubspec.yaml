@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_form_builder: ^10.1.0
   form_builder_validators: ^11.2.0
+  supabase_flutter: ^2.0.0
 
 dev_dependencies:
   flutter_test:

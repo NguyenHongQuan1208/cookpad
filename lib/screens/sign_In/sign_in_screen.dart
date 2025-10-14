@@ -40,7 +40,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Đăng nhập')),
+      appBar: AppBar(
+        title: const Text(
+          'Đăng nhập',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: FocusScope(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -55,8 +60,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     // Logo
                     Image.asset(
                       ImagePaths.cookpadLogo2,
-                      width: context.w(150),
-                      height: context.h(150),
+                      width: context.w(200),
+                      height: context.h(200),
                     ),
                     SizedBox(height: context.h(20)),
                     // Email Input
@@ -66,7 +71,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       decoration: InputDecoration(
                         hintText: 'Email',
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(
+                            context.radius(30),
+                          ),
                         ),
                         prefixIcon: const Icon(
                           Icons.email,
@@ -95,7 +102,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       decoration: InputDecoration(
                         hintText: 'Password',
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(
+                            context.radius(30),
+                          ),
                         ),
                         prefixIcon: const Icon(Icons.lock, color: Colors.black),
                         suffixIcon: IconButton(
