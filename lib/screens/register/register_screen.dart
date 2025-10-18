@@ -1,6 +1,6 @@
 import 'package:cooking_pad/config/dimens.dart';
 import 'package:cooking_pad/config/image_paths.dart';
-import 'package:cooking_pad/main.dart';
+import 'package:cooking_pad/network/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -232,17 +232,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           final username = usernameController.text;
 
                           try {
-                            // Gọi Supabase để đăng ký người dùng và thêm metadata
-                            final AuthResponse res = await supabase.auth.signUp(
-                              email: email,
-                              password: password,
-                              data: {'user_name': username},
-                            );
+                            // Call the signUpWithEmailPassword method from AuthServic
+                            final authService = AuthService();
+                            final AuthResponse res = await authService
+                                .signUpWithEmailPassword(email, password, {
+                                  'username': username,
+                                });
 
-                            // Kiểm tra nếu widget vẫn được mounted trước khi sử dụng BuildContext
+                            // Check if the widget is still mounted before using BuildContext
                             if (!mounted) return;
 
-                            // Hiển thị SnackBar khi đăng ký thành công
+                            // Show SnackBar on successful registration
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -254,7 +254,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           } catch (e) {
                             if (!mounted) return;
 
-                            // Hiển thị SnackBar khi đăng ký thất bại
+                            // Show SnackBar on registration failure
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -266,6 +266,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           }
                         }
                       },
+
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
                         backgroundColor: colorScheme.primary,
