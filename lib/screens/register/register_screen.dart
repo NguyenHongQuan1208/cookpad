@@ -1,11 +1,13 @@
 import 'package:cooking_pad/config/dimens.dart';
 import 'package:cooking_pad/config/image_paths.dart';
+import 'package:cooking_pad/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -223,17 +225,45 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     SizedBox(height: context.h(24)),
                     // Register Button
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          final username =
-                              _formKey.currentState?.fields['username']?.value;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Đăng ký thành công với tên người dùng: $username',
+                          final email = emailController.text;
+                          final password = passwordController.text;
+                          final username = usernameController.text;
+
+                          try {
+                            // Gọi Supabase để đăng ký người dùng và thêm metadata
+                            final AuthResponse res = await supabase.auth.signUp(
+                              email: email,
+                              password: password,
+                              data: {'user_name': username},
+                            );
+
+                            // Kiểm tra nếu widget vẫn được mounted trước khi sử dụng BuildContext
+                            if (!mounted) return;
+
+                            // Hiển thị SnackBar khi đăng ký thành công
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Đăng ký thành công với tên người dùng: $username',
+                                ),
+                                backgroundColor: Colors.green,
                               ),
-                            ),
-                          );
+                            );
+                          } catch (e) {
+                            if (!mounted) return;
+
+                            // Hiển thị SnackBar khi đăng ký thất bại
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Đăng ký thất bại: ${e.toString()}',
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -243,6 +273,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       ),
                       child: const Text('Đăng ký'),
                     ),
+
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () {

@@ -1,14 +1,20 @@
+import 'package:cooking_pad/network/api_config.dart';
 import 'package:cooking_pad/themeColors/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'navigation/app_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await FlutterConfig.loadEnvVariables();
+
+  // Initialize Supabase
   await Supabase.initialize(
-    url: 'https://wqbtafvilbfanqdwtzwg.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxYnRhZnZpbGJmYW5xZHd0endnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAzNzY3ODQsImV4cCI6MjA3NTk1Mjc4NH0.lj5N0NShDuCtY43sn0hkjJxQlpbVSed58xIUulgeEbU',
+    url: ApiConfig.supabaseUrl,
+    anonKey: ApiConfig.supabaseKey,
   );
 
   runApp(ProviderScope(child: MyApp()));
