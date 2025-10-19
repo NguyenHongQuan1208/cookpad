@@ -41,6 +41,7 @@ dependencies:
   form_builder_validators: ^11.2.0
   supabase_flutter: ^2.0.0
   flutter_config: ^2.0.2
+  delightful_toast: ^1.1.0
 
 dev_dependencies:
   flutter_test:
