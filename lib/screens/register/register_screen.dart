@@ -1,6 +1,7 @@
 import 'package:cooking_pad/config/dimens.dart';
 import 'package:cooking_pad/config/image_paths.dart';
 import 'package:cooking_pad/network/services/auth_service.dart';
+import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -231,42 +232,26 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           final password = passwordController.text;
                           final username = usernameController.text;
 
-                          try {
-                            // Call the signUpWithEmailPassword method from AuthServic
-                            final authService = AuthService();
-                            final AuthResponse res = await authService
-                                .signUpWithEmailPassword(email, password, {
-                                  'username': username,
-                                });
+                          final authService = AuthService();
 
-                            // Check if the widget is still mounted before using BuildContext
-                            if (!mounted) return;
-
-                            // Show SnackBar on successful registration
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Đăng ký thành công với tên người dùng: $username',
-                                ),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
-                          } catch (e) {
-                            if (!mounted) return;
-
-                            // Show SnackBar on registration failure
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Đăng ký thất bại: ${e.toString()}',
-                                ),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          }
+                          await callSupabaseAuthApi<AuthResponse>(
+                            service: () => authService.signUpWithEmailPassword(
+                              email,
+                              password,
+                              {'username': username},
+                            ),
+                            context: context,
+                            successMessage: 'Đăng ký thành công!',
+                            onSuccess: (res) {
+                              // print(res.user);
+                              // context.push(Routes.signin);
+                            },
+                            onError: (msg) {
+                              debugPrint('Đăng ký thất bại: $msg');
+                            },
+                          );
                         }
                       },
-
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
                         backgroundColor: colorScheme.primary,
