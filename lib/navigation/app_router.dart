@@ -1,13 +1,11 @@
-// File: lib/navigation/app_router.dart
-
 import 'package:cooking_pad/screens/home/home_screen.dart';
 import 'package:cooking_pad/screens/onboard/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/screens/sign_In/sign_in_screen.dart';
 import 'package:cooking_pad/screens/register/register_screen.dart';
-// import '../features/onboarding/ui/splash_screen.dart';
-import 'route_names.dart';
+import 'package:cooking_pad/navigation/route_names.dart';
+import 'package:cooking_pad/navigation/navigation_wrapper.dart';
 
 enum SlideDirection { right, left, up, down }
 
@@ -60,16 +58,17 @@ class SlideRouteTransition extends CustomTransitionPage<void> {
 }
 
 final GoRouter router = GoRouter(
-  initialLocation: Routes.onboarding,
+  initialLocation: '/',
   routes: [
+    GoRoute(
+      path: '/',
+      pageBuilder: (context, state) =>
+          state.slidePage(const NavigationWrapper()),
+    ),
     GoRoute(
       path: Routes.onboarding,
       pageBuilder: (context, state) => state.slidePage(const OnboardScreen()),
     ),
-    // GoRoute(
-    //   path: Routes.splash,
-    //   pageBuilder: (context, state) => state.slidePage(const SplashScreen()),
-    // ),
     GoRoute(
       path: Routes.home,
       pageBuilder: (context, state) => state.slidePage(HomeScreen()),
@@ -82,21 +81,5 @@ final GoRouter router = GoRouter(
       path: Routes.register,
       pageBuilder: (context, state) => state.slidePage(const RegisterScreen()),
     ),
-    // GoRoute(
-    //   path: Routes.otp,
-    //   pageBuilder: (context, state) {
-    //     final map = state.extra as Map?;
-    //     return state.slidePage(
-    //       OtpScreen(
-    //         email: map?['email'],
-    //         isRegister: map?['isRegister'],
-    //       ),
-    //     );
-    //   },
-    // ),
-    // GoRoute(
-    //   path: Routes.main,
-    //   pageBuilder: (context, state) => state.slidePage(const MainScreen()),
-    // ),
   ],
 );
