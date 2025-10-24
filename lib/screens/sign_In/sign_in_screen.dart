@@ -1,11 +1,15 @@
 import 'package:cooking_pad/config/dimens.dart';
 import 'package:cooking_pad/config/image_paths.dart';
+import 'package:cooking_pad/network/services/auth_service.dart';
+import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
+import 'package:riverpod/src/framework.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
@@ -141,16 +145,27 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     SizedBox(height: context.h(24)),
                     // Sign-In Button
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           final email =
                               _formKey.currentState?.fields['email']?.value;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Đăng nhập thành công với email: $email',
-                              ),
+                          final password =
+                              _formKey.currentState?.fields['password']?.value;
+
+                          final authService = AuthService();
+
+                          await callSupabaseAuthApi<AuthResponse>(
+                            context: context,
+                            service: () => authService.signInWithEmailPassword(
+                              email,
+                              password,
                             ),
+                            successMessage: 'Đăng nhập thành công!',
+                            onSuccess: (response) {},
+                            onError: (errorMessage) {
+                              debugPrint('Lỗi đăng nhập: $errorMessage');
+                            },
+                            errorPrefix: 'Lỗi đăng nhập',
                           );
                         }
                       },
@@ -161,6 +176,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       ),
                       child: const Text('Đăng nhập'),
                     ),
+
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () {
