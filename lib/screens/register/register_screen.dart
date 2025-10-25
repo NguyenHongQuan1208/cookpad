@@ -244,7 +244,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             successMessage: 'Đăng ký thành công!',
                             onSuccess: (res) {
                               // print(res.user);
-                              // context.push(Routes.signin);
+                              context.go(Routes.home);
                             },
                             onError: (msg) {
                               debugPrint('Đăng ký thất bại: $msg');

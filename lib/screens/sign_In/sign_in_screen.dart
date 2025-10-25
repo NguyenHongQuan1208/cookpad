@@ -161,7 +161,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               password,
                             ),
                             successMessage: 'Đăng nhập thành công!',
-                            onSuccess: (response) {},
+                            onSuccess: (response) {
+                              context.go(Routes.home);
+                            },
                             onError: (errorMessage) {
                               debugPrint('Lỗi đăng nhập: $errorMessage');
                             },
