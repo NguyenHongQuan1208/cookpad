@@ -5,7 +5,6 @@ import 'package:cooking_pad/widget/toast/toast.dart';
 
 typedef SupabaseAuthService<T> = Future<T> Function();
 
-/// Gọi Supabase Auth API với loading, success/error toast và callback
 Future<void> callSupabaseAuthApi<T>({
   required SupabaseAuthService<T> service,
   BuildContext? context,
@@ -16,6 +15,8 @@ Future<void> callSupabaseAuthApi<T>({
   bool showLoading = true,
   String? successMessage,
   String errorPrefix = "Error",
+  bool showSuccessToast = true,
+  bool showErrorToast = true,
 }) async {
   try {
     // Trước khi gọi API
@@ -35,7 +36,10 @@ Future<void> callSupabaseAuthApi<T>({
 
     // Success
     onSuccess?.call(result);
-    if (successMessage != null && context != null && context.mounted) {
+    if (showSuccessToast &&
+        successMessage != null &&
+        context != null &&
+        context.mounted) {
       ToastHelper.showSuccessToast(
         context,
         title: 'Success',
@@ -47,7 +51,7 @@ Future<void> callSupabaseAuthApi<T>({
     String errorMsg = e is AuthException ? e.message : e.toString();
     onError?.call(errorMsg);
 
-    if (context != null && context.mounted) {
+    if (showErrorToast && context != null && context.mounted) {
       ToastHelper.showErrorToast(
         context,
         title: errorPrefix,

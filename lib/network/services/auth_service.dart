@@ -27,6 +27,11 @@ class AuthService {
     );
   }
 
+  // Logout
+  Future<void> signOut() async {
+    await _supabase.auth.signOut();
+  }
+
   // Lấy email của người dùng hiện tại
   String? getCurrentUserEmail() {
     final session = _supabase.auth.currentSession;
