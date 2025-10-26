@@ -1,14 +1,16 @@
 import 'package:cooking_pad/config/image_paths.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
+import 'package:cooking_pad/providers/storage/storage_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/config/dimens.dart';
 
-class OnboardScreen extends StatelessWidget {
+class OnboardScreen extends ConsumerWidget {
   const OnboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -56,6 +58,7 @@ class OnboardScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    ref.read(storageProvider.notifier).setShown();
                     context.push(Routes.signin);
                   },
                   style: ElevatedButton.styleFrom(
@@ -74,7 +77,9 @@ class OnboardScreen extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(storageProvider.notifier).setShown();
+                  },
                   child: Text(
                     'Để sau',
                     style: TextStyle(

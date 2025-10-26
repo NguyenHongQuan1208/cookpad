@@ -1,16 +1,18 @@
 import 'package:cooking_pad/navigation/route_names.dart';
+import 'package:cooking_pad/providers/storage/storage_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class NavigationWrapper extends StatefulWidget {
+class NavigationWrapper extends ConsumerStatefulWidget {
   const NavigationWrapper({super.key});
 
   @override
-  State<NavigationWrapper> createState() => _NavigationWrapperState();
+  ConsumerState<NavigationWrapper> createState() => _NavigationWrapperState();
 }
 
-class _NavigationWrapperState extends State<NavigationWrapper> {
+class _NavigationWrapperState extends ConsumerState<NavigationWrapper> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -43,9 +45,14 @@ class _NavigationWrapperState extends State<NavigationWrapper> {
             }
           });
         } else {
+          final shown = ref.watch(storageProvider);
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
-              context.go(Routes.onboarding);
+              if (!shown) {
+                context.go(Routes.onboarding);
+              } else {
+                context.go(Routes.signin);
+              }
             }
           });
         }
