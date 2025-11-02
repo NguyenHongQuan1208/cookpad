@@ -5,47 +5,25 @@ import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class RegisterScreen extends ConsumerStatefulWidget {
+class RegisterScreen extends HookWidget {
   const RegisterScreen({super.key});
 
   @override
-  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends ConsumerState<RegisterScreen> {
-  final _formKey = GlobalKey<FormBuilderState>();
-  bool _obscureText = true;
-  bool _obscureConfirmText = true;
-  late TextEditingController usernameController;
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-  late TextEditingController confirmPasswordController;
-
-  @override
-  void initState() {
-    super.initState();
-    usernameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    usernameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormBuilderState>());
+    final usernameController = useTextEditingController();
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final confirmPasswordController = useTextEditingController();
+
+    final obscureText = useState(true);
+    final obscureConfirmText = useState(true);
+
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -65,7 +43,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: FormBuilder(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -75,6 +53,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       width: context.w(200),
                       height: context.h(150),
                     ),
+
                     // Username Input
                     FormBuilderTextField(
                       name: 'username',
@@ -98,11 +77,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           errorText: 'Tên người dùng không được để trống',
                         ),
                       ]),
-                      onChanged: (value) {
-                        _formKey.currentState?.fields['username']?.validate();
-                      },
+                      onChanged: (value) =>
+                          formKey.currentState?.fields['username']?.validate(),
                     ),
                     SizedBox(height: context.h(16)),
+
                     // Email Input
                     FormBuilderTextField(
                       name: 'email',
@@ -130,11 +109,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           errorText: 'Email không đúng định dạng',
                         ),
                       ]),
-                      onChanged: (value) {
-                        _formKey.currentState?.fields['email']?.validate();
-                      },
+                      onChanged: (value) =>
+                          formKey.currentState?.fields['email']?.validate(),
                     ),
                     SizedBox(height: context.h(16)),
+
                     // Password Input
                     FormBuilderTextField(
                       name: 'password',
@@ -149,20 +128,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         prefixIcon: const Icon(Icons.lock, color: Colors.black),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscureText
+                            obscureText.value
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: Colors.black,
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
+                          onPressed: () =>
+                              obscureText.value = !obscureText.value,
                         ),
                         errorStyle: const TextStyle(color: Colors.red),
                       ),
-                      obscureText: _obscureText,
+                      obscureText: obscureText.value,
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -173,11 +149,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           errorText: 'Mật khẩu phải có ít nhất 8 ký tự',
                         ),
                       ]),
-                      onChanged: (value) {
-                        _formKey.currentState?.fields['password']?.validate();
-                      },
+                      onChanged: (value) =>
+                          formKey.currentState?.fields['password']?.validate(),
                     ),
                     SizedBox(height: context.h(16)),
+
                     // Confirm Password Input
                     FormBuilderTextField(
                       name: 'confirm_password',
@@ -192,20 +168,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         prefixIcon: const Icon(Icons.lock, color: Colors.black),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscureConfirmText
+                            obscureConfirmText.value
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: Colors.black,
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureConfirmText = !_obscureConfirmText;
-                            });
-                          },
+                          onPressed: () => obscureConfirmText.value =
+                              !obscureConfirmText.value,
                         ),
                         errorStyle: const TextStyle(color: Colors.red),
                       ),
-                      obscureText: _obscureConfirmText,
+                      obscureText: obscureConfirmText.value,
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -218,16 +191,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           return null;
                         },
                       ]),
-                      onChanged: (value) {
-                        _formKey.currentState?.fields['confirm_password']
-                            ?.validate();
-                      },
+                      onChanged: (value) => formKey
+                          .currentState
+                          ?.fields['confirm_password']
+                          ?.validate(),
                     ),
                     SizedBox(height: context.h(24)),
+
                     // Register Button
                     ElevatedButton(
                       onPressed: () async {
-                        if (_formKey.currentState?.saveAndValidate() ?? false) {
+                        if (formKey.currentState?.saveAndValidate() ?? false) {
                           final email = emailController.text;
                           final password = passwordController.text;
                           final username = usernameController.text;
@@ -243,7 +217,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             context: context,
                             successMessage: 'Đăng ký thành công!',
                             onSuccess: (res) {
-                              // print(res.user);
                               context.go(Routes.home);
                             },
                             onError: (msg) {
@@ -262,9 +235,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                     const SizedBox(height: 16),
                     TextButton(
-                      onPressed: () {
-                        context.push(Routes.signin);
-                      },
+                      onPressed: () => context.push(Routes.signin),
                       child: Text(
                         'Đã có tài khoản? Đăng nhập ngay',
                         style: TextStyle(

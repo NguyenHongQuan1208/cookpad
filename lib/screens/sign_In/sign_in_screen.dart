@@ -5,40 +5,21 @@ import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class SignInScreen extends ConsumerStatefulWidget {
+class SignInScreen extends HookWidget {
   const SignInScreen({super.key});
 
   @override
-  ConsumerState<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends ConsumerState<SignInScreen> {
-  final _formKey = GlobalKey<FormBuilderState>();
-  bool _obscureText = true;
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-
-  @override
-  void initState() {
-    super.initState();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormBuilderState>());
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final obscureText = useState(true);
+
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -57,7 +38,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: FormBuilder(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -68,6 +49,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       height: context.h(200),
                     ),
                     SizedBox(height: context.h(20)),
+
                     // Email Input
                     FormBuilderTextField(
                       name: 'email',
@@ -96,10 +78,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ),
                       ]),
                       onChanged: (value) {
-                        _formKey.currentState?.fields['email']?.validate();
+                        formKey.currentState?.fields['email']?.validate();
                       },
                     ),
                     SizedBox(height: context.h(16)),
+
+                    // Password Input
                     FormBuilderTextField(
                       name: 'password',
                       controller: passwordController,
@@ -113,20 +97,17 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         prefixIcon: const Icon(Icons.lock, color: Colors.black),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscureText
+                            obscureText.value
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: Colors.black,
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
+                          onPressed: () =>
+                              obscureText.value = !obscureText.value,
                         ),
                         errorStyle: const TextStyle(color: Colors.red),
                       ),
-                      obscureText: _obscureText,
+                      obscureText: obscureText.value,
                       autovalidateMode: AutovalidateMode.onUnfocus,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -138,18 +119,19 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ),
                       ]),
                       onChanged: (value) {
-                        _formKey.currentState?.fields['password']?.validate();
+                        formKey.currentState?.fields['password']?.validate();
                       },
                     ),
                     SizedBox(height: context.h(24)),
+
                     // Sign-In Button
                     ElevatedButton(
                       onPressed: () async {
-                        if (_formKey.currentState?.saveAndValidate() ?? false) {
+                        if (formKey.currentState?.saveAndValidate() ?? false) {
                           final email =
-                              _formKey.currentState?.fields['email']?.value;
+                              formKey.currentState?.fields['email']?.value;
                           final password =
-                              _formKey.currentState?.fields['password']?.value;
+                              formKey.currentState?.fields['password']?.value;
 
                           final authService = AuthService();
 
