@@ -1,7 +1,9 @@
 import 'package:cooking_pad/config/image_paths.dart';
+import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:cooking_pad/providers/storage/storage_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/config/dimens.dart';
 
 class OnboardScreen extends ConsumerWidget {
@@ -34,6 +36,7 @@ class OnboardScreen extends ConsumerWidget {
                 fontSize: context.font(26),
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.left,
             ),
           ),
 
@@ -42,37 +45,55 @@ class OnboardScreen extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: context.w(30)),
             child: Text(
-              'Khám phá và xem công thức miễn phí.',
+              'Đăng ký và xem công thức miễn phí.',
               style: textTheme.bodyMedium?.copyWith(fontSize: context.font(16)),
+              textAlign: TextAlign.left,
             ),
           ),
 
-          Spacer(), // đẩy nút xuống cuối màn hình
+          SizedBox(height: context.h(200)),
 
           Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                ref.read(storageProvider.notifier).setShown();
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: context.w(100),
-                  vertical: context.h(16),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    ref.read(storageProvider.notifier).setShown();
+                    context.push(Routes.signin);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.w(60),
+                      vertical: context.h(14),
+                    ),
+                    backgroundColor: colorScheme.primary,
+                  ),
+                  child: Text(
+                    'Đăng ký hoặc Đăng nhập',
+                    style: TextStyle(
+                      fontSize: context.font(16),
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
                 ),
-                backgroundColor: colorScheme.primary,
-              ),
-              child: Text(
-                'Bắt đầu',
-                style: TextStyle(
-                  fontSize: context.font(18),
-                  color: colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
+                TextButton(
+                  onPressed: () {
+                    ref.read(storageProvider.notifier).setShown();
+                    context.push(Routes.home);
+                  },
+                  child: Text(
+                    'Để sau',
+                    style: TextStyle(
+                      fontSize: context.font(14),
+                      color: textTheme.bodyMedium?.color,
+                      fontStyle: FontStyle.italic,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
-
-          SizedBox(height: context.h(60)),
         ],
       ),
     );

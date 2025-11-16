@@ -1,32 +1,35 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StorageNotifier extends StateNotifier<bool> {
-  StorageNotifier() : super(false) {
-    _loadFlag();
+class StorageNotifier extends StateNotifier<AsyncValue<bool>> {
+  StorageNotifier() : super(const AsyncValue.loading()) {
+    _init();
   }
 
-  void setShown() async {
-    state = true;
-    await _saveFlag();
+  Future<void> _init() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      state = AsyncValue.data(prefs.getBool('isShowOnboard') ?? false);
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
   }
 
-  void reset() async {
-    state = false;
-    await _saveFlag();
-  }
-
-  Future<void> _saveFlag() async {
+  Future<void> setShown() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isShowOnboard', state);
+    state = const AsyncValue.data(true);
+    await prefs.setBool('isShowOnboard', true);
   }
 
-  Future<void> _loadFlag() async {
+  Future<void> reset() async {
     final prefs = await SharedPreferences.getInstance();
-    state = prefs.getBool('isShowOnboard') ?? false;
+    state = const AsyncValue.data(false);
+    await prefs.setBool('isShowOnboard', false);
   }
 }
 
-final storageProvider = StateNotifierProvider<StorageNotifier, bool>((ref) {
-  return StorageNotifier();
-});
+final storageProvider =
+    StateNotifierProvider<StorageNotifier, AsyncValue<bool>>((ref) {
+      return StorageNotifier();
+    });
