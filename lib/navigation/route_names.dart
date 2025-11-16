@@ -7,4 +7,5 @@ class Routes {
   static const signin = '/signin';
   static const home = '/home';
   static const onboarding = '/onboarding';
+  static const personal = '/personal';
 }

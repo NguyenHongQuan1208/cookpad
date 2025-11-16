@@ -39,7 +39,10 @@ class MyApp extends ConsumerWidget {
     final session = authState.value;
     final isLoggedIn = session != null;
 
-    final router = createRouter(isOnboardShown, isLoggedIn);
+    final router = createRouter(
+      isOnboardShown: isOnboardShown,
+      isLoggedIn: isLoggedIn,
+    );
 
     return MaterialApp.router(
       routerConfig: router,

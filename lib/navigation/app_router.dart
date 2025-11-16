@@ -1,6 +1,6 @@
-import 'package:cooking_pad/main.dart';
 import 'package:cooking_pad/screens/home/home_screen.dart';
 import 'package:cooking_pad/screens/onboard/onboarding_screen.dart';
+import 'package:cooking_pad/screens/personal_screen.dart';
 import 'package:cooking_pad/screens/sign_In/sign_in_screen.dart';
 import 'package:cooking_pad/screens/register/register_screen.dart';
 import 'package:cooking_pad/navigation/route_names.dart';
@@ -58,7 +58,10 @@ class SlideRouteTransition extends CustomTransitionPage<void> {
        );
 }
 
-GoRouter createRouter(bool isOnboardShown, bool isLoggedIn) {
+GoRouter createRouter({
+  required bool isOnboardShown,
+  required bool isLoggedIn,
+}) {
   String initialRoute;
 
   if (!isOnboardShown) {
@@ -74,20 +77,74 @@ GoRouter createRouter(bool isOnboardShown, bool isLoggedIn) {
     routes: [
       GoRoute(
         path: Routes.onboarding,
-        pageBuilder: (context, state) => state.slidePage(const OnboardScreen()),
+        pageBuilder: (context, state) => state.slidePage(
+          const OnboardScreen(),
+          direction: SlideDirection.right,
+        ),
       ),
-      GoRoute(
-        path: Routes.home,
-        pageBuilder: (context, state) => state.slidePage(HomeScreen()),
-      ),
+
       GoRoute(
         path: Routes.signin,
-        pageBuilder: (context, state) => state.slidePage(SignInScreen()),
+        pageBuilder: (context, state) =>
+            state.slidePage(SignInScreen(), direction: SlideDirection.right),
       ),
+
       GoRoute(
         path: Routes.register,
-        pageBuilder: (context, state) =>
-            state.slidePage(const RegisterScreen()),
+        pageBuilder: (context, state) => state.slidePage(
+          const RegisterScreen(),
+          direction: SlideDirection.right,
+        ),
+      ),
+
+      // ===== SHELL ROUTE FOR BOTTOM TAB =====
+      ShellRoute(
+        builder: (context, state, child) {
+          final currentUrl = state.uri.toString();
+
+          int getCurrentIndex() {
+            if (currentUrl == Routes.home) return 0;
+            if (currentUrl == Routes.personal) return 1;
+            return 0;
+          }
+
+          return Scaffold(
+            body: child,
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: getCurrentIndex(),
+              onTap: (i) {
+                if (i == 0) {
+                  context.go(Routes.home);
+                } else {
+                  context.go(Routes.personal);
+                }
+              },
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Personal',
+                ),
+              ],
+            ),
+          );
+        },
+
+        routes: [
+          GoRoute(
+            path: Routes.home,
+            pageBuilder: (context, state) =>
+                state.slidePage(HomeScreen(), direction: SlideDirection.right),
+          ),
+
+          GoRoute(
+            path: Routes.personal,
+            pageBuilder: (context, state) => state.slidePage(
+              PersonalScreen(),
+              direction: SlideDirection.right,
+            ),
+          ),
+        ],
       ),
     ],
   );
