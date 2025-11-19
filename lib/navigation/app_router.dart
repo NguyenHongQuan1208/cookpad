@@ -88,23 +88,13 @@ final router = GoRouter(
         direction: SlideDirection.right,
       ),
     ),
-    ShellRoute(
-      builder: (context, state, child) {
-        final currentUrl = state.uri.toString();
-        int getCurrentIndex() {
-          if (currentUrl == Routes.home) return 0;
-          if (currentUrl == Routes.personal) return 1;
-          return 0;
-        }
-
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
         return Scaffold(
-          body: child,
+          body: navigationShell,
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: getCurrentIndex(),
-            onTap: (i) {
-              if (i == 0) context.go(Routes.home);
-              if (i == 1) context.go(Routes.personal);
-            },
+            currentIndex: navigationShell.currentIndex,
+            onTap: (index) => navigationShell.goBranch(index),
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
@@ -115,18 +105,28 @@ final router = GoRouter(
           ),
         );
       },
-      routes: [
-        GoRoute(
-          path: Routes.home,
-          pageBuilder: (context, state) =>
-              state.slidePage(HomeScreen(), direction: SlideDirection.right),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.home,
+              pageBuilder: (context, state) => state.slidePage(
+                HomeScreen(),
+                direction: SlideDirection.right,
+              ),
+            ),
+          ],
         ),
-        GoRoute(
-          path: Routes.personal,
-          pageBuilder: (context, state) => state.slidePage(
-            PersonalScreen(),
-            direction: SlideDirection.right,
-          ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.personal,
+              pageBuilder: (context, state) => state.slidePage(
+                PersonalScreen(),
+                direction: SlideDirection.right,
+              ),
+            ),
+          ],
         ),
       ],
     ),

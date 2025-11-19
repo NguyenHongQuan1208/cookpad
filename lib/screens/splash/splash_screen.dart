@@ -27,7 +27,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     isOnboardShown.when(
       loading: () => _retryRedirect(),
       error: (_, __) => context.go(Routes.onboarding),
-      data: (shown) => context.go(shown ? Routes.home : Routes.onboarding),
+      data: (shown) => context.go(shown ? Routes.signin : Routes.onboarding),
     );
   }
 
