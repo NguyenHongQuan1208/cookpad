@@ -31,154 +31,183 @@ class SignInScreen extends HookWidget {
         ),
         scrolledUnderElevation: 0,
       ),
-      body: FocusScope(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: FormBuilder(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // Logo
-                    Image.asset(
-                      ImagePaths.cookpadLogo2,
-                      width: context.w(200),
-                      height: context.h(200),
-                    ),
-                    SizedBox(height: context.h(20)),
-
-                    // Email Input
-                    FormBuilderTextField(
-                      name: 'email',
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            context.radius(30),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: FocusScope(
+              child: GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SingleChildScrollView(
+                    child: FormBuilder(
+                      key: formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Logo
+                          Image.asset(
+                            ImagePaths.cookpadLogo2,
+                            width: context.w(200),
+                            height: context.h(200),
                           ),
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Colors.black,
-                        ),
-                        errorStyle: const TextStyle(color: Colors.red),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      autovalidateMode: AutovalidateMode.onUnfocus,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                          errorText: 'Email không được để trống',
-                        ),
-                        FormBuilderValidators.email(
-                          errorText: 'Email không đúng định dạng',
-                        ),
-                      ]),
-                      onChanged: (value) {
-                        formKey.currentState?.fields['email']?.validate();
-                      },
-                    ),
-                    SizedBox(height: context.h(16)),
+                          SizedBox(height: context.h(20)),
 
-                    // Password Input
-                    FormBuilderTextField(
-                      name: 'password',
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            context.radius(30),
-                          ),
-                        ),
-                        prefixIcon: const Icon(Icons.lock, color: Colors.black),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            obscureText.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.black,
-                          ),
-                          onPressed: () =>
-                              obscureText.value = !obscureText.value,
-                        ),
-                        errorStyle: const TextStyle(color: Colors.red),
-                      ),
-                      obscureText: obscureText.value,
-                      autovalidateMode: AutovalidateMode.onUnfocus,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                          errorText: 'Password không được để trống',
-                        ),
-                        FormBuilderValidators.minLength(
-                          8,
-                          errorText: 'Password phải có ít nhất 8 ký tự',
-                        ),
-                      ]),
-                      onChanged: (value) {
-                        formKey.currentState?.fields['password']?.validate();
-                      },
-                    ),
-                    SizedBox(height: context.h(24)),
-
-                    // Sign-In Button
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (formKey.currentState?.saveAndValidate() ?? false) {
-                          final email =
-                              formKey.currentState?.fields['email']?.value;
-                          final password =
-                              formKey.currentState?.fields['password']?.value;
-
-                          final authService = AuthService();
-
-                          await callSupabaseAuthApi<AuthResponse>(
-                            context: context,
-                            service: () => authService.signInWithEmailPassword(
-                              email,
-                              password,
+                          // Email Input
+                          FormBuilderTextField(
+                            name: 'email',
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              hintText: 'Email',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  context.radius(30),
+                                ),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                color: Colors.black,
+                              ),
+                              errorStyle: const TextStyle(color: Colors.red),
                             ),
-                            successMessage: 'Đăng nhập thành công!',
-                            onSuccess: (response) {
-                              context.go(Routes.home);
+                            keyboardType: TextInputType.emailAddress,
+                            autovalidateMode: AutovalidateMode.onUnfocus,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(
+                                errorText: 'Email không được để trống',
+                              ),
+                              FormBuilderValidators.email(
+                                errorText: 'Email không đúng định dạng',
+                              ),
+                            ]),
+                            onChanged: (value) {
+                              formKey.currentState?.fields['email']?.validate();
                             },
-                            onError: (errorMessage) {
-                              debugPrint('Lỗi đăng nhập: $errorMessage');
-                            },
-                            errorPrefix: 'Lỗi đăng nhập',
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.onPrimary,
-                      ),
-                      child: const Text('Đăng nhập'),
-                    ),
+                          ),
+                          SizedBox(height: context.h(16)),
 
-                    const SizedBox(height: 16),
-                    TextButton(
-                      onPressed: () {
-                        context.push(Routes.register);
-                      },
-                      child: Text(
-                        'Chưa có tài khoản? Đăng ký ngay',
-                        style: TextStyle(
-                          color: colorScheme.primary,
-                          fontStyle: FontStyle.italic,
-                        ),
+                          // Password Input
+                          FormBuilderTextField(
+                            name: 'password',
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              hintText: 'Password',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  context.radius(30),
+                                ),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                color: Colors.black,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  obscureText.value
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () =>
+                                    obscureText.value = !obscureText.value,
+                              ),
+                              errorStyle: const TextStyle(color: Colors.red),
+                            ),
+                            obscureText: obscureText.value,
+                            autovalidateMode: AutovalidateMode.onUnfocus,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(
+                                errorText: 'Password không được để trống',
+                              ),
+                              FormBuilderValidators.minLength(
+                                8,
+                                errorText: 'Password phải có ít nhất 8 ký tự',
+                              ),
+                            ]),
+                            onChanged: (value) {
+                              formKey.currentState?.fields['password']
+                                  ?.validate();
+                            },
+                          ),
+                          SizedBox(height: context.h(24)),
+
+                          // Sign-In Button
+                          ElevatedButton(
+                            onPressed: () async {
+                              if (formKey.currentState?.saveAndValidate() ??
+                                  false) {
+                                final email = formKey
+                                    .currentState
+                                    ?.fields['email']
+                                    ?.value;
+                                final password = formKey
+                                    .currentState
+                                    ?.fields['password']
+                                    ?.value;
+
+                                final authService = AuthService();
+
+                                await callSupabaseAuthApi<AuthResponse>(
+                                  context: context,
+                                  service: () => authService
+                                      .signInWithEmailPassword(email, password),
+                                  successMessage: 'Đăng nhập thành công!',
+                                  onSuccess: (response) {
+                                    context.go(Routes.home);
+                                  },
+                                  onError: (errorMessage) {
+                                    debugPrint('Lỗi đăng nhập: $errorMessage');
+                                  },
+                                  errorPrefix: 'Lỗi đăng nhập',
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.infinity, 50),
+                              backgroundColor: colorScheme.primary,
+                              foregroundColor: colorScheme.onPrimary,
+                            ),
+                            child: const Text('Đăng nhập'),
+                          ),
+
+                          const SizedBox(height: 16),
+                          TextButton(
+                            onPressed: () {
+                              context.push(Routes.register);
+                            },
+                            child: Text(
+                              'Chưa có tài khoản? Đăng ký ngay',
+                              style: TextStyle(
+                                color: colorScheme.primary,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+          Positioned(
+            bottom: context.h(30),
+            right: context.w(20),
+            child: TextButton(
+              onPressed: () => context.go(Routes.home),
+              style: TextButton.styleFrom(backgroundColor: Colors.transparent),
+              child: Text(
+                'Bỏ qua',
+                style: TextStyle(
+                  color: colorScheme.primary,
+                  fontSize: 18,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
