@@ -26,7 +26,7 @@ class SignInScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Đăng nhập',
+          'Sign In',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         scrolledUnderElevation: 0,
@@ -74,10 +74,10 @@ class SignInScreen extends HookWidget {
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                errorText: 'Email không được để trống',
+                                errorText: 'Email cannot be empty',
                               ),
                               FormBuilderValidators.email(
-                                errorText: 'Email không đúng định dạng',
+                                errorText: 'Invalid email format',
                               ),
                             ]),
                             onChanged: (value) {
@@ -117,11 +117,12 @@ class SignInScreen extends HookWidget {
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                errorText: 'Password không được để trống',
+                                errorText: 'Password cannot be empty',
                               ),
                               FormBuilderValidators.minLength(
                                 8,
-                                errorText: 'Password phải có ít nhất 8 ký tự',
+                                errorText:
+                                    'Password must be at least 8 characters',
                               ),
                             ]),
                             onChanged: (value) {
@@ -151,14 +152,14 @@ class SignInScreen extends HookWidget {
                                   context: context,
                                   service: () => authService
                                       .signInWithEmailPassword(email, password),
-                                  successMessage: 'Đăng nhập thành công!',
+                                  successMessage: 'Sign in successful!',
                                   onSuccess: (response) {
                                     context.go(Routes.home);
                                   },
                                   onError: (errorMessage) {
-                                    debugPrint('Lỗi đăng nhập: $errorMessage');
+                                    debugPrint('Sign in error: $errorMessage');
                                   },
-                                  errorPrefix: 'Lỗi đăng nhập',
+                                  errorPrefix: 'Sign in error',
                                 );
                               }
                             },
@@ -167,7 +168,7 @@ class SignInScreen extends HookWidget {
                               backgroundColor: colorScheme.primary,
                               foregroundColor: colorScheme.onPrimary,
                             ),
-                            child: const Text('Đăng nhập'),
+                            child: const Text('Sign In'),
                           ),
 
                           const SizedBox(height: 16),
@@ -176,7 +177,7 @@ class SignInScreen extends HookWidget {
                               context.push(Routes.register);
                             },
                             child: Text(
-                              'Chưa có tài khoản? Đăng ký ngay',
+                              'Don’t have an account? Register now',
                               style: TextStyle(
                                 color: colorScheme.primary,
                                 fontStyle: FontStyle.italic,
@@ -198,7 +199,7 @@ class SignInScreen extends HookWidget {
               onPressed: () => context.go(Routes.home),
               style: TextButton.styleFrom(backgroundColor: Colors.transparent),
               child: Text(
-                'Bỏ qua',
+                'Skip',
                 style: TextStyle(
                   color: colorScheme.primary,
                   fontSize: 18,

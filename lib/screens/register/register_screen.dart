@@ -30,7 +30,7 @@ class RegisterScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Đăng ký',
+          'Register',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -62,7 +62,7 @@ class RegisterScreen extends HookWidget {
                             name: 'username',
                             controller: usernameController,
                             decoration: InputDecoration(
-                              hintText: 'Tên người dùng',
+                              hintText: 'Username',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   context.radius(30),
@@ -77,7 +77,7 @@ class RegisterScreen extends HookWidget {
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                errorText: 'Tên người dùng không được để trống',
+                                errorText: 'Username cannot be empty',
                               ),
                             ]),
                             onChanged: (value) => formKey
@@ -108,10 +108,10 @@ class RegisterScreen extends HookWidget {
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                errorText: 'Email không được để trống',
+                                errorText: 'Email cannot be empty',
                               ),
                               FormBuilderValidators.email(
-                                errorText: 'Email không đúng định dạng',
+                                errorText: 'Invalid email format',
                               ),
                             ]),
                             onChanged: (value) => formKey
@@ -126,7 +126,7 @@ class RegisterScreen extends HookWidget {
                             name: 'password',
                             controller: passwordController,
                             decoration: InputDecoration(
-                              hintText: 'Mật khẩu',
+                              hintText: 'Password',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   context.radius(30),
@@ -152,11 +152,12 @@ class RegisterScreen extends HookWidget {
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                errorText: 'Mật khẩu không được để trống',
+                                errorText: 'Password cannot be empty',
                               ),
                               FormBuilderValidators.minLength(
                                 8,
-                                errorText: 'Mật khẩu phải có ít nhất 8 ký tự',
+                                errorText:
+                                    'Password must be at least 8 characters',
                               ),
                             ]),
                             onChanged: (value) => formKey
@@ -171,7 +172,7 @@ class RegisterScreen extends HookWidget {
                             name: 'confirm_password',
                             controller: confirmPasswordController,
                             decoration: InputDecoration(
-                              hintText: 'Xác nhận mật khẩu',
+                              hintText: 'Confirm Password',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                   context.radius(30),
@@ -197,12 +198,11 @@ class RegisterScreen extends HookWidget {
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                errorText:
-                                    'Xác nhận mật khẩu không được để trống',
+                                errorText: 'Confirm Password cannot be empty',
                               ),
                               (value) {
                                 if (value != passwordController.text) {
-                                  return 'Mật khẩu không khớp';
+                                  return 'Passwords do not match';
                                 }
                                 return null;
                               },
@@ -233,12 +233,12 @@ class RegisterScreen extends HookWidget {
                                         {'username': username},
                                       ),
                                   context: context,
-                                  successMessage: 'Đăng ký thành công!',
+                                  successMessage: 'Registration successful!',
                                   onSuccess: (res) {
                                     context.go(Routes.home);
                                   },
                                   onError: (msg) {
-                                    debugPrint('Đăng ký thất bại: $msg');
+                                    debugPrint('Registration failed: $msg');
                                   },
                                 );
                               }
@@ -248,14 +248,14 @@ class RegisterScreen extends HookWidget {
                               backgroundColor: colorScheme.primary,
                               foregroundColor: colorScheme.onPrimary,
                             ),
-                            child: const Text('Đăng ký'),
+                            child: const Text('Register'),
                           ),
 
                           const SizedBox(height: 16),
                           TextButton(
                             onPressed: () => context.push(Routes.signin),
                             child: Text(
-                              'Đã có tài khoản? Đăng nhập ngay',
+                              'Already have an account? Sign in now',
                               style: TextStyle(
                                 color: colorScheme.primary,
                                 fontStyle: FontStyle.italic,
@@ -278,7 +278,7 @@ class RegisterScreen extends HookWidget {
               onPressed: () => context.go(Routes.home),
               style: TextButton.styleFrom(backgroundColor: Colors.transparent),
               child: Text(
-                'Bỏ qua',
+                'Skip',
                 style: TextStyle(
                   color: colorScheme.primary,
                   fontSize: 18,
