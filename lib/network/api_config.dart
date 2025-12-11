@@ -1,6 +1,6 @@
-import 'package:flutter_config/flutter_config.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiConfig {
-  static String get supabaseUrl => FlutterConfig.get('API_URL');
-  static String get supabaseKey => FlutterConfig.get('API_ANON_KEY');
+  static String get supabaseUrl => dotenv.env['API_URL'] ?? '';
+  static String get supabaseKey => dotenv.env['API_ANON_KEY'] ?? '';
 }
