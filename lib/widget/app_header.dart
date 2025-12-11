@@ -9,16 +9,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 4.0,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.onPrimary),
       child: Column(
         children: [
           Padding(
@@ -44,7 +35,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
