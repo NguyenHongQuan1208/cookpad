@@ -1,3 +1,4 @@
+import 'package:cooking_pad/widget/app_header.dart';
 import 'package:flutter/material.dart';
 
 class PersonalScreen extends StatelessWidget {
@@ -6,10 +7,7 @@ class PersonalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Personal", textAlign: TextAlign.center),
-        centerTitle: true,
-      ),
+      appBar: AppHeader(isSearchScreen: false),
       body: const Center(
         child: Text("This is Personal Screen", style: TextStyle(fontSize: 20)),
       ),

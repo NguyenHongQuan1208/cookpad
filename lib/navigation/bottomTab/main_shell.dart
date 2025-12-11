@@ -21,7 +21,17 @@ class MainShell extends ConsumerWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
         currentIndex: navigationShell.currentIndex,
+        selectedLabelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        ),
         onTap: (index) {
           if (index == 1 && !isLoggedIn) {
             showDialog(
@@ -47,7 +57,7 @@ class MainShell extends ConsumerWidget {
           }
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Search'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Delicious Dish Storage',

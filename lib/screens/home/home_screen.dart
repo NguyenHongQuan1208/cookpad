@@ -1,6 +1,7 @@
 import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:cooking_pad/network/services/auth_service.dart';
 import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
+import 'package:cooking_pad/widget/app_header.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,10 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home", textAlign: TextAlign.center),
-        centerTitle: true,
-      ),
+      appBar: AppHeader(isSearchScreen: true),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
