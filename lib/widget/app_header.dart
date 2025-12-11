@@ -18,17 +18,27 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0),
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/default_avatar.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  child: Builder(
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.transparent,
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/images/default_avatar.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
+
                 Expanded(
                   child: Text(
                     isSearchScreen ? 'Search' : 'Your Dish Storage',
@@ -39,7 +49,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-                // Notification Icon
+
                 IconButton(
                   icon: Icon(Icons.notifications),
                   onPressed: () {

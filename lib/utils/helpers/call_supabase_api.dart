@@ -59,9 +59,12 @@ Future<void> callSupabaseAuthApi<T>({
       );
     }
   } finally {
-    // Cleanup
     if (showLoading && context != null && context.mounted) {
-      Navigator.of(context, rootNavigator: true).maybePop();
+      final navigator = Navigator.maybeOf(context, rootNavigator: true);
+
+      if (navigator != null && navigator.canPop()) {
+        navigator.pop();
+      }
     }
     onFinally?.call();
   }
