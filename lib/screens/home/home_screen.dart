@@ -1,8 +1,10 @@
 import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:cooking_pad/network/services/auth_service.dart';
+import 'package:cooking_pad/screens/home/widget/search_bar_button.dart';
+import 'package:cooking_pad/screens/home/widget/trending_section_widget.dart';
 import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
 import 'package:cooking_pad/widget/app_header.dart';
-import 'package:cooking_pad/widget/app_drawer.dart'; // 👈 import drawer mới
+import 'package:cooking_pad/widget/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,14 +26,21 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppHeader(isSearchScreen: true),
-
       drawer: AppDrawer(onLogout: () => _logout(context)),
 
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            const Text("This is Home Screen", style: TextStyle(fontSize: 20)),
+            const SizedBox(height: 16),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SearchBarButton(onTap: () {}),
+            ),
+
+            const SizedBox(height: 32),
+
+            TrendingSectionWidget(),
           ],
         ),
       ),

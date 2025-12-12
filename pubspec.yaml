@@ -67,6 +67,9 @@ flutter:
   - assets/images/cookpad_logo.png
   - assets/images/cookpad_logo2.png
   - assets/images/default_avatar.jpg
+  - assets/images/spaghetti.jpg
+  - assets/images/demo.jpg
+
 
   # - assets/svg/
 
