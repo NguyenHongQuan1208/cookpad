@@ -1,5 +1,6 @@
 import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:cooking_pad/network/services/auth_service.dart';
+import 'package:cooking_pad/screens/home/widget/premium_list_widget.dart';
 import 'package:cooking_pad/screens/home/widget/search_bar_button.dart';
 import 'package:cooking_pad/screens/home/widget/trending_section_widget.dart';
 import 'package:cooking_pad/utils/helpers/call_supabase_api.dart';
@@ -41,6 +42,12 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             TrendingSectionWidget(),
+
+            const SizedBox(height: 32),
+
+            PremiumList(),
+
+            const SizedBox(height: 100),
           ],
         ),
       ),
