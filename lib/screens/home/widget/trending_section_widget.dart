@@ -1,6 +1,8 @@
+import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:cooking_pad/screens/home/widget/trending_item.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
 class TrendingSectionWidget extends HookWidget {
   const TrendingSectionWidget({super.key});
@@ -9,11 +11,15 @@ class TrendingSectionWidget extends HookWidget {
   Widget build(BuildContext context) {
     final trendingItems = [1, 2, 3, 4, 5, 6];
 
+    final handleTap = useCallback(() {
+      context.push(Routes.detailKeyword);
+    }, [context]);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -26,11 +32,11 @@ class TrendingSectionWidget extends HookWidget {
               ),
             ],
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 6,
               mainAxisSpacing: 6,
@@ -41,9 +47,7 @@ class TrendingSectionWidget extends HookWidget {
               final itemNumber = trendingItems[index];
               return TrendingItemWidget(
                 title: 'Trending Item $itemNumber',
-                onTap: () {
-                  print('Tapped on item: $itemNumber');
-                },
+                onTap: handleTap,
               );
             },
           ),

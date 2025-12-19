@@ -9,4 +9,5 @@ class Routes {
   static const onboarding = '/onboarding';
   static const personal = '/personal';
   static const search = '/search';
+  static const detailKeyword = '/detail-keyword';
 }

@@ -1,4 +1,5 @@
 import 'package:cooking_pad/navigation/bottomTab/main_shell.dart';
+import 'package:cooking_pad/screens/detail_trending/detail_trending_keyword_screen.dart';
 import 'package:cooking_pad/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -66,28 +67,26 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: Routes.splash,
-      pageBuilder: (context, state) => state.slidePage(
-        const SplashScreen(),
-        direction: SlideDirection.right,
-      ),
+      pageBuilder: (context, state) =>
+          state.slidePage(const SplashScreen(), direction: SlideDirection.left),
     ),
     GoRoute(
       path: Routes.onboarding,
       pageBuilder: (context, state) => state.slidePage(
         const OnboardScreen(),
-        direction: SlideDirection.right,
+        direction: SlideDirection.left,
       ),
     ),
     GoRoute(
       path: Routes.signin,
       pageBuilder: (context, state) =>
-          state.slidePage(SignInScreen(), direction: SlideDirection.right),
+          state.slidePage(SignInScreen(), direction: SlideDirection.left),
     ),
     GoRoute(
       path: Routes.register,
       pageBuilder: (context, state) => state.slidePage(
         const RegisterScreen(),
-        direction: SlideDirection.right,
+        direction: SlideDirection.left,
       ),
     ),
     GoRoute(
@@ -104,9 +103,14 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.home,
+              pageBuilder: (context, state) =>
+                  state.slidePage(HomeScreen(), direction: SlideDirection.left),
+            ),
+            GoRoute(
+              path: Routes.detailKeyword,
               pageBuilder: (context, state) => state.slidePage(
-                HomeScreen(),
-                direction: SlideDirection.right,
+                DetailKeywordsScreen(),
+                direction: SlideDirection.left,
               ),
             ),
           ],
@@ -117,7 +121,7 @@ final router = GoRouter(
               path: Routes.personal,
               pageBuilder: (context, state) => state.slidePage(
                 PersonalScreen(),
-                direction: SlideDirection.right,
+                direction: SlideDirection.left,
               ),
             ),
           ],

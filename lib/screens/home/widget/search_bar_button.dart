@@ -15,7 +15,7 @@ class SearchBarButton extends HookWidget {
   Widget build(BuildContext context) {
     final onTap = useCallback(() {
       context.push(Routes.search);
-    }, []);
+    }, [context]);
 
     return GestureDetector(
       onTap: onTap,
