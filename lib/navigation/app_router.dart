@@ -1,4 +1,5 @@
 import 'package:cooking_pad/navigation/bottomTab/main_shell.dart';
+import 'package:cooking_pad/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cooking_pad/screens/home/home_screen.dart';
@@ -88,6 +89,11 @@ final router = GoRouter(
         const RegisterScreen(),
         direction: SlideDirection.right,
       ),
+    ),
+    GoRoute(
+      path: Routes.search,
+      pageBuilder: (context, state) =>
+          state.slidePage(const SearchScreen(), direction: SlideDirection.left),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

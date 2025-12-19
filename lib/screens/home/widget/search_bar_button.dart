@@ -1,17 +1,22 @@
+import 'package:cooking_pad/navigation/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
-class SearchBarButton extends StatelessWidget {
-  final VoidCallback onTap;
+class SearchBarButton extends HookWidget {
   final String placeholder;
 
   const SearchBarButton({
     super.key,
-    required this.onTap,
     this.placeholder = 'Enter the ingredients',
   });
 
   @override
   Widget build(BuildContext context) {
+    final onTap = useCallback(() {
+      context.push(Routes.search);
+    }, []);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(

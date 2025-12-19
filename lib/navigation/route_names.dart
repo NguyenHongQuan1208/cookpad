@@ -8,4 +8,5 @@ class Routes {
   static const home = '/home';
   static const onboarding = '/onboarding';
   static const personal = '/personal';
+  static const search = '/search';
 }

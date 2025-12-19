@@ -27,8 +27,6 @@ class PremiumList extends HookWidget {
           ),
         ),
 
-        const SizedBox(height: 12),
-
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

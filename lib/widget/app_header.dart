@@ -51,7 +51,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                 ),
 
                 IconButton(
-                  icon: Icon(Icons.notifications),
+                  icon: Icon(Icons.notifications_rounded, size: 28),
                   onPressed: () {
                     print('Bell icon pressed');
                   },
