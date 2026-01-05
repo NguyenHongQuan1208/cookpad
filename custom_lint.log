@@ -694,3 +694,193 @@ at:
 #10     CustomLintServer._handleRequest (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:175:22)
 <asynchronous suspension>
 
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 Plugin WrapWithConsumer threw while analyzing /Users/nguyenhongquan/Documents/PERSONAL_PROJECT/cookpad/lib/screens/detail_trending/detail_trending_keyword_screen.dart:
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithConsumer] 2025-12-19T15:06:51.655575
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #1      AnalysisSessionImpl.getResolvedLibraryByElement (package:analyzer/src/dart/analysis/session.dart:128:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #2      AnalysisSessionImpl.getResolvedLibraryContaining (package:analyzer/src/dart/analysis/session.dart:152:49)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #3      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:464:25)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #4      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:168:17)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #5      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #6      ChangeBuilderImpl.waitForCompletion (package:custom_lint_core/src/change_reporter.dart:287:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #7      ChangeBuilderImpl.complete (package:custom_lint_core/src/change_reporter.dart:296:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #8      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #9      _ClientAnalyzerPlugin.handleEditGetAssists (package:custom_lint_builder/src/client.dart:569:7)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #10     ServerPlugin._getResponse (package:analyzer_plugin/plugin/plugin.dart:560:18)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 #11     ServerPlugin._onRequest (package:analyzer_plugin/plugin/plugin.dart:606:18)
+[WrapWithConsumer] 2025-12-19T15:06:51.655575 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.655575
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 Plugin WrapWithProviderScope threw while analyzing /Users/nguyenhongquan/Documents/PERSONAL_PROJECT/cookpad/lib/screens/detail_trending/detail_trending_keyword_screen.dart:
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #1      AnalysisSessionImpl.getResolvedLibraryByElement (package:analyzer/src/dart/analysis/session.dart:128:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #2      AnalysisSessionImpl.getResolvedLibraryContaining (package:analyzer/src/dart/analysis/session.dart:152:49)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #3      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:464:25)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #4      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:168:17)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #5      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #6      ChangeBuilderImpl.waitForCompletion (package:custom_lint_core/src/change_reporter.dart:287:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #7      ChangeBuilderImpl.complete (package:custom_lint_core/src/change_reporter.dart:296:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #8      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #9      _ClientAnalyzerPlugin.handleEditGetAssists (package:custom_lint_builder/src/client.dart:569:7)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #10     ServerPlugin._getResponse (package:analyzer_plugin/plugin/plugin.dart:560:18)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 #11     ServerPlugin._onRequest (package:analyzer_plugin/plugin/plugin.dart:606:18)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656459
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 Plugin WrapWithConsumer threw while analyzing /Users/nguyenhongquan/Documents/PERSONAL_PROJECT/cookpad/lib/screens/detail_trending/detail_trending_keyword_screen.dart:
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithConsumer] 2025-12-19T15:06:51.656572
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #1      AnalysisSessionImpl.getResolvedLibraryByElement (package:analyzer/src/dart/analysis/session.dart:128:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #2      AnalysisSessionImpl.getResolvedLibraryContaining (package:analyzer/src/dart/analysis/session.dart:152:49)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #3      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:464:25)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #4      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:168:17)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #5      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #6      ChangeBuilderImpl.waitForCompletion (package:custom_lint_core/src/change_reporter.dart:287:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #7      ChangeBuilderImpl.complete (package:custom_lint_core/src/change_reporter.dart:296:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #8      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #9      _ClientAnalyzerPlugin.handleEditGetAssists (package:custom_lint_builder/src/client.dart:569:7)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #10     ServerPlugin._getResponse (package:analyzer_plugin/plugin/plugin.dart:560:18)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 #11     ServerPlugin._onRequest (package:analyzer_plugin/plugin/plugin.dart:606:18)
+[WrapWithConsumer] 2025-12-19T15:06:51.656572 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656572
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 Plugin WrapWithProviderScope threw while analyzing /Users/nguyenhongquan/Documents/PERSONAL_PROJECT/cookpad/lib/screens/detail_trending/detail_trending_keyword_screen.dart:
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #1      AnalysisSessionImpl.getResolvedLibraryByElement (package:analyzer/src/dart/analysis/session.dart:128:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #2      AnalysisSessionImpl.getResolvedLibraryContaining (package:analyzer/src/dart/analysis/session.dart:152:49)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #3      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:464:25)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #4      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:168:17)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #5      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #6      ChangeBuilderImpl.waitForCompletion (package:custom_lint_core/src/change_reporter.dart:287:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #7      ChangeBuilderImpl.complete (package:custom_lint_core/src/change_reporter.dart:296:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #8      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #9      _ClientAnalyzerPlugin.handleEditGetAssists (package:custom_lint_builder/src/client.dart:569:7)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #10     ServerPlugin._getResponse (package:analyzer_plugin/plugin/plugin.dart:560:18)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 #11     ServerPlugin._onRequest (package:analyzer_plugin/plugin/plugin.dart:606:18)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656644
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 Plugin WrapWithConsumer threw while analyzing /Users/nguyenhongquan/Documents/PERSONAL_PROJECT/cookpad/lib/screens/detail_trending/detail_trending_keyword_screen.dart:
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithConsumer] 2025-12-19T15:06:51.656725
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #1      AnalysisSessionImpl.getResolvedLibraryByElement (package:analyzer/src/dart/analysis/session.dart:128:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #2      AnalysisSessionImpl.getResolvedLibraryContaining (package:analyzer/src/dart/analysis/session.dart:152:49)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #3      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:464:25)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #4      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:168:17)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #5      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #6      ChangeBuilderImpl.waitForCompletion (package:custom_lint_core/src/change_reporter.dart:287:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #7      ChangeBuilderImpl.complete (package:custom_lint_core/src/change_reporter.dart:296:5)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #8      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #9      _ClientAnalyzerPlugin.handleEditGetAssists (package:custom_lint_builder/src/client.dart:569:7)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #10     ServerPlugin._getResponse (package:analyzer_plugin/plugin/plugin.dart:560:18)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 #11     ServerPlugin._onRequest (package:analyzer_plugin/plugin/plugin.dart:606:18)
+[WrapWithConsumer] 2025-12-19T15:06:51.656725 <asynchronous suspension>
+[WrapWithConsumer] 2025-12-19T15:06:51.656725
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 Plugin WrapWithProviderScope threw while analyzing /Users/nguyenhongquan/Documents/PERSONAL_PROJECT/cookpad/lib/screens/detail_trending/detail_trending_keyword_screen.dart:
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #1      AnalysisSessionImpl.getResolvedLibraryByElement (package:analyzer/src/dart/analysis/session.dart:128:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #2      AnalysisSessionImpl.getResolvedLibraryContaining (package:analyzer/src/dart/analysis/session.dart:152:49)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #3      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:464:25)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #4      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:168:17)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #5      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #6      ChangeBuilderImpl.waitForCompletion (package:custom_lint_core/src/change_reporter.dart:287:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #7      ChangeBuilderImpl.complete (package:custom_lint_core/src/change_reporter.dart:296:5)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #8      Future.wait.<anonymous closure> (dart:async/future.dart:546:21)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #9      _ClientAnalyzerPlugin.handleEditGetAssists (package:custom_lint_builder/src/client.dart:569:7)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #10     ServerPlugin._getResponse (package:analyzer_plugin/plugin/plugin.dart:560:18)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 #11     ServerPlugin._onRequest (package:analyzer_plugin/plugin/plugin.dart:606:18)
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806 <asynchronous suspension>
+[WrapWithProviderScope] 2025-12-19T15:06:51.656806
+[custom_lint] 2026-01-05T15:31:47.843700 lib/custom_lint_client.dart:4:8: Error: Error when reading '/Users/nguyenhongquan/.pub-cache/hosted/pub.dev/riverpod_lint-3.1.0/lib/riverpod_lint.dart': No such file or directory
+[custom_lint] 2026-01-05T15:31:47.843700 import 'package:riverpod_lint/riverpod_lint.dart' as riverpod_lint;
+[custom_lint] 2026-01-05T15:31:47.843700        ^
+[custom_lint] 2026-01-05T15:31:47.843700 lib/custom_lint_client.dart:17:37: Error: Undefined name 'createPlugin'.
+[custom_lint] 2026-01-05T15:31:47.843700     {'riverpod_lint': riverpod_lint.createPlugin,
+[custom_lint] 2026-01-05T15:31:47.843700                                     ^^^^^^^^^^^^
+[custom_lint] 2026-01-05T15:31:47.843700
+[custom_lint] 2026-01-05T15:31:47.843700
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:637)
+<asynchronous suspension>
+
+[custom_lint] 2026-01-05T15:44:43.877599 lib/custom_lint_client.dart:4:8: Error: Error when reading '/Users/nguyenhongquan/.pub-cache/hosted/pub.dev/riverpod_lint-3.1.0/lib/riverpod_lint.dart': No such file or directory
+[custom_lint] 2026-01-05T15:44:43.877599 import 'package:riverpod_lint/riverpod_lint.dart' as riverpod_lint;
+[custom_lint] 2026-01-05T15:44:43.877599        ^
+[custom_lint] 2026-01-05T15:44:43.877599 lib/custom_lint_client.dart:17:37: Error: Undefined name 'createPlugin'.
+[custom_lint] 2026-01-05T15:44:43.877599     {'riverpod_lint': riverpod_lint.createPlugin,
+[custom_lint] 2026-01-05T15:44:43.877599                                     ^^^^^^^^^^^^
+[custom_lint] 2026-01-05T15:44:43.877599
+[custom_lint] 2026-01-05T15:44:43.877599
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:637)
+<asynchronous suspension>
+

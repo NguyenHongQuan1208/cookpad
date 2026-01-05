@@ -1,5 +1,5 @@
+import 'package:cooking_pad/screens/detail_trending/widget/custom_detail_header.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DetailKeywordsScreen extends StatelessWidget {
   const DetailKeywordsScreen({super.key});
@@ -7,21 +7,26 @@ class DetailKeywordsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            context.pop();
-          },
-        ),
-        title: const Text(
-          'Detail Keywords',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text('Detail Keywords Screen', style: TextStyle(fontSize: 16)),
+      body: Column(
+        children: [
+          CustomDetailHeader(
+            keywordTitle: 'Detail Keywords',
+            onFilterPressed: () {
+              // TODO: mở bottom sheet / dialog filter
+            },
+            onChanged: (value) {},
+          ),
+
+          /// Body content
+          const Expanded(
+            child: Center(
+              child: Text(
+                'Detail Keywords Screen',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
