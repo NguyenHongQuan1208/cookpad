@@ -1,3 +1,4 @@
+import 'package:cooking_pad/navigation/bottomTab/main_shell.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -22,7 +23,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                     builder: (context) {
                       return GestureDetector(
                         onTap: () {
-                          Scaffold.of(context).openDrawer();
+                          MainShell.scaffoldKey.currentState?.openDrawer();
                         },
                         child: CircleAvatar(
                           radius: 20,
