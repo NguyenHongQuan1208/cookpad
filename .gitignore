@@ -68,3 +68,5 @@ lib/generated_plugin_registrant.dart
 *.env
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter
+
+custom_lint.log

@@ -40,11 +40,7 @@ Future<void> callSupabaseAuthApi<T>({
         successMessage != null &&
         context != null &&
         context.mounted) {
-      ToastHelper.showSuccessToast(
-        context,
-        title: 'Success',
-        subtitle: successMessage,
-      );
+      SnackbarHelper.show(context, successMessage);
     }
   } catch (e) {
     // Bắt lỗi
@@ -52,11 +48,7 @@ Future<void> callSupabaseAuthApi<T>({
     onError?.call(errorMsg);
 
     if (showErrorToast && context != null && context.mounted) {
-      ToastHelper.showErrorToast(
-        context,
-        title: errorPrefix,
-        subtitle: errorMsg,
-      );
+      SnackbarHelper.show(context, '$errorPrefix: $errorMsg');
     }
   } finally {
     if (showLoading && context != null && context.mounted) {

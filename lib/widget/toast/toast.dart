@@ -1,138 +1,125 @@
-import 'package:delightful_toast/delight_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:delightful_toast/toast/components/toast_card.dart';
-import 'package:delightful_toast/toast/utils/enums.dart';
 
-class ToastHelper {
-  // Show success toast
-  static void showSuccessToast(
-    BuildContext context, {
-    required String title,
-    String? subtitle,
-    Duration duration = const Duration(seconds: 3),
+class SnackbarHelper {
+  static OverlayEntry? _overlayEntry;
+
+  static void show(
+    BuildContext context,
+    String message, {
+    Duration duration = const Duration(milliseconds: 1000),
   }) {
-    DelightToastBar(
-      autoDismiss: true,
-      snackbarDuration: duration,
-      position: DelightSnackbarPosition.top,
-      builder: (context) => ToastCard(
-        leading: const Icon(Icons.check_circle, size: 28, color: Colors.green),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
-        ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-              )
-            : null,
-        color: Colors.green.shade50,
-        shadowColor: Colors.green.withOpacity(0.2),
+    // Xóa toast cũ nếu đang hiển thị
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+
+    final overlayState = Overlay.of(context);
+
+    // Better solution: use a StatefulWidget for the Toast content
+
+    _overlayEntry = OverlayEntry(
+      builder: (context) => _ToastWidget(
+        message: message,
+        duration: duration,
+        onDismissed: () {
+          _overlayEntry?.remove();
+          _overlayEntry = null;
+        },
       ),
-    ).show(context);
+    );
+
+    overlayState.insert(_overlayEntry!);
+  }
+}
+
+class _ToastWidget extends StatefulWidget {
+  final String message;
+  final Duration duration;
+  final VoidCallback onDismissed;
+
+  const _ToastWidget({
+    required this.message,
+    required this.duration,
+    required this.onDismissed,
+  });
+
+  @override
+  State<_ToastWidget> createState() => _ToastWidgetState();
+}
+
+class _ToastWidgetState extends State<_ToastWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacity;
+  late Animation<Offset> _offset;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _opacity = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _offset = Tween<Offset>(
+      begin: const Offset(0, 0.5),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
+    _show();
   }
 
-  // Show error toast
-  static void showErrorToast(
-    BuildContext context, {
-    required String title,
-    String? subtitle,
-    Duration duration = const Duration(seconds: 4),
-  }) {
-    DelightToastBar(
-      autoDismiss: true,
-      snackbarDuration: duration,
-      position: DelightSnackbarPosition.top,
-      builder: (context) => ToastCard(
-        leading: const Icon(Icons.error_outline, size: 28, color: Colors.red),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            color: Colors.red,
-          ),
-        ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: TextStyle(fontSize: 12, color: Colors.red[400]),
-              )
-            : null,
-        color: Colors.red.shade50,
-        shadowColor: Colors.red.withOpacity(0.2),
-      ),
-    ).show(context);
+  void _show() async {
+    await _controller.forward();
+    await Future.delayed(widget.duration);
+    if (mounted) {
+      await _controller.reverse();
+      widget.onDismissed();
+    }
   }
 
-  // Show warning toast
-  static void showWarningToast(
-    BuildContext context, {
-    required String title,
-    String? subtitle,
-    Duration duration = const Duration(seconds: 3),
-  }) {
-    DelightToastBar(
-      autoDismiss: true,
-      snackbarDuration: duration,
-      position: DelightSnackbarPosition.top,
-      builder: (context) => ToastCard(
-        leading: const Icon(
-          Icons.warning_amber,
-          size: 28,
-          color: Colors.orange,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            color: Colors.orange,
-          ),
-        ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: TextStyle(fontSize: 12, color: Colors.orange[600]),
-              )
-            : null,
-        color: Colors.orange.shade50,
-        shadowColor: Colors.orange.withOpacity(0.2),
-      ),
-    ).show(context);
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
-  // Show info toast
-  static void showInfoToast(
-    BuildContext context, {
-    required String title,
-    String? subtitle,
-    Duration duration = const Duration(seconds: 3),
-  }) {
-    DelightToastBar(
-      autoDismiss: true,
-      snackbarDuration: duration,
-      position: DelightSnackbarPosition.top,
-      builder: (context) => ToastCard(
-        leading: const Icon(Icons.info_outline, size: 28, color: Colors.blue),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            color: Colors.blue,
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 40,
+      left: 20,
+      right: 20,
+      child: Material(
+        color: Colors.transparent,
+        child: SlideTransition(
+          position: _offset,
+          child: FadeTransition(
+            opacity: _opacity,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Text(
+                widget.message,
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
         ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: TextStyle(fontSize: 12, color: Colors.blue[600]),
-              )
-            : null,
-        color: Colors.blue.shade50,
-        shadowColor: Colors.blue.withOpacity(0.2),
       ),
-    ).show(context);
+    );
   }
 }
