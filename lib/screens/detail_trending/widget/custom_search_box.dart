@@ -14,12 +14,14 @@ class CustomSearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       height: 44,
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.black),
+        border: Border.all(color: colorScheme.onSurface),
       ),
       alignment: Alignment.center,
       child: TextField(
@@ -28,7 +30,7 @@ class CustomSearchBox extends StatelessWidget {
         decoration: InputDecoration(
           isDense: true,
           hintText: hintText ?? 'Keyword',
-          hintStyle: TextStyle(color: Colors.grey.shade500),
+          hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 10),
 

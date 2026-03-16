@@ -24,6 +24,8 @@ class LoadingSpinnerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     Widget spinner = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -33,7 +35,7 @@ class LoadingSpinnerWidget extends StatelessWidget {
           child: CircularProgressIndicator(
             strokeWidth: strokeWidth,
             valueColor: AlwaysStoppedAnimation<Color>(
-              color ?? Theme.of(context).colorScheme.primary,
+              color ?? colorScheme.primary,
             ),
           ),
         ),
@@ -44,7 +46,7 @@ class LoadingSpinnerWidget extends StatelessWidget {
             style:
                 messageStyle ??
                 TextStyle(
-                  color: color ?? Theme.of(context).colorScheme.onBackground,
+                  color: color ?? colorScheme.onSurface,
                   fontSize: 14,
                 ),
             textAlign: TextAlign.center,
@@ -60,7 +62,7 @@ class LoadingSpinnerWidget extends StatelessWidget {
           ModalBarrier(
             color:
                 overlayColor?.withValues(alpha: overlayOpacity) ??
-                Colors.black.withValues(alpha: overlayOpacity),
+                colorScheme.shadow.withValues(alpha: overlayOpacity),
             dismissible: false,
           ),
           spinner,

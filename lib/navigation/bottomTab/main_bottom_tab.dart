@@ -12,6 +12,7 @@ class MainBottomTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
     final authState = ref.watch(authSessionProvider);
     final isLoggedIn = authState.maybeWhen(
       data: (session) => session != null,
@@ -24,7 +25,7 @@ class MainBottomTab extends ConsumerWidget {
         color: Colors.transparent,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.12),
+            color: colorScheme.shadow.withValues(alpha: 0.12),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -36,13 +37,11 @@ class MainBottomTab extends ConsumerWidget {
           topRight: Radius.circular(24),
         ),
         child: BottomNavigationBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: colorScheme.primary,
           currentIndex: navigationShell.currentIndex,
 
-          selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-          unselectedItemColor: Theme.of(
-            context,
-          ).colorScheme.onPrimary.withOpacity(0.5),
+          selectedItemColor: colorScheme.onPrimary,
+          unselectedItemColor: colorScheme.onPrimary.withValues(alpha: 0.5),
 
           selectedLabelStyle: const TextStyle(
             fontSize: 14,

@@ -7,11 +7,13 @@ class NewestItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       width: 120,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: Colors.grey.shade200,
+        color: colorScheme.surfaceContainerHighest,
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -41,11 +43,11 @@ class NewestItem extends StatelessWidget {
 
                 // Author
                 Text(
-                  'Aßuthor',
+                  'Author',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: Colors.grey.shade600,
+                    color: colorScheme.onSurfaceVariant,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

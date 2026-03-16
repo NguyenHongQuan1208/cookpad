@@ -12,14 +12,16 @@ class TrendingItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(6),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(6),
-        splashColor: Colors.white.withOpacity(0.2),
-        highlightColor: Colors.black.withOpacity(0.1),
+        splashColor: colorScheme.onPrimary.withValues(alpha: 0.2),
+        highlightColor: colorScheme.shadow.withValues(alpha: 0.1),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
@@ -27,11 +29,11 @@ class TrendingItemWidget extends StatelessWidget {
               image: AssetImage('assets/images/demo.jpg'),
               fit: BoxFit.cover,
             ),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: Colors.black26,
+                color: colorScheme.shadow.withValues(alpha: 0.26),
                 blurRadius: 4,
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
               ),
             ],
           ),
@@ -41,7 +43,10 @@ class TrendingItemWidget extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                colors: [
+                  Colors.transparent,
+                  colorScheme.shadow.withValues(alpha: 0.7),
+                ],
               ),
             ),
             padding: const EdgeInsets.all(12),
@@ -53,8 +58,8 @@ class TrendingItemWidget extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: colorScheme.onPrimary,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),

@@ -19,16 +19,16 @@ class TrendingSectionWidget extends HookWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Trending Keywords',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(
                 'Updated 10:00',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline),
               ),
             ],
           ),

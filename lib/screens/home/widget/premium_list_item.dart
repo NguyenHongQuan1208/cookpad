@@ -8,6 +8,8 @@ class PremiumListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -44,12 +46,15 @@ class PremiumListItem extends StatelessWidget {
 
                     const SizedBox(height: 6),
 
-                    const Text(
+                    Text(
                       'This is a subtitle for premium content. '
                       'It can span up to two lines.',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: colorScheme.outline,
+                      ),
                     ),
                   ],
                 ),

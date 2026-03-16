@@ -16,6 +16,8 @@ class CustomDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SafeArea(
       bottom: false,
       child: Padding(
@@ -50,7 +52,7 @@ class CustomDetailHeader extends StatelessWidget {
                 height: 44,
                 width: 44,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: colorScheme.surfaceContainerHigh,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: const Icon(Icons.tune),

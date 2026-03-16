@@ -14,8 +14,6 @@ class SnackbarHelper {
 
     final overlayState = Overlay.of(context);
 
-    // Better solution: use a StatefulWidget for the Toast content
-
     _overlayEntry = OverlayEntry(
       builder: (context) => _ToastWidget(
         message: message,
@@ -88,6 +86,8 @@ class _ToastWidgetState extends State<_ToastWidget>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Positioned(
       bottom: 40,
       left: 20,
@@ -101,11 +101,11 @@ class _ToastWidgetState extends State<_ToastWidget>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               decoration: BoxDecoration(
-                color: Colors.grey[800],
+                color: colorScheme.inverseSurface,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: colorScheme.shadow.withValues(alpha: 0.2),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -113,7 +113,10 @@ class _ToastWidgetState extends State<_ToastWidget>
               ),
               child: Text(
                 widget.message,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(
+                  color: colorScheme.onInverseSurface,
+                  fontSize: 16,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

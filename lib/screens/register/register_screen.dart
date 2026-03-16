@@ -24,8 +24,7 @@ class RegisterScreen extends HookWidget {
     final obscureText = useState(true);
     final obscureConfirmText = useState(true);
 
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -68,11 +67,11 @@ class RegisterScreen extends HookWidget {
                                   context.radius(30),
                                 ),
                               ),
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.person,
-                                color: Colors.black,
+                                color: colorScheme.onSurface,
                               ),
-                              errorStyle: const TextStyle(color: Colors.red),
+                              errorStyle: TextStyle(color: colorScheme.error),
                             ),
                             autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: FormBuilderValidators.compose([
@@ -98,11 +97,11 @@ class RegisterScreen extends HookWidget {
                                   context.radius(30),
                                 ),
                               ),
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.email,
-                                color: Colors.black,
+                                color: colorScheme.onSurface,
                               ),
-                              errorStyle: const TextStyle(color: Colors.red),
+                              errorStyle: TextStyle(color: colorScheme.error),
                             ),
                             keyboardType: TextInputType.emailAddress,
                             autovalidateMode: AutovalidateMode.onUnfocus,
@@ -132,21 +131,21 @@ class RegisterScreen extends HookWidget {
                                   context.radius(30),
                                 ),
                               ),
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.lock,
-                                color: Colors.black,
+                                color: colorScheme.onSurface,
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   obscureText.value
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.black,
+                                  color: colorScheme.onSurface,
                                 ),
                                 onPressed: () =>
                                     obscureText.value = !obscureText.value,
                               ),
-                              errorStyle: const TextStyle(color: Colors.red),
+                              errorStyle: TextStyle(color: colorScheme.error),
                             ),
                             obscureText: obscureText.value,
                             autovalidateMode: AutovalidateMode.onUnfocus,
@@ -178,21 +177,21 @@ class RegisterScreen extends HookWidget {
                                   context.radius(30),
                                 ),
                               ),
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.lock,
-                                color: Colors.black,
+                                color: colorScheme.onSurface,
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   obscureConfirmText.value
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.black,
+                                  color: colorScheme.onSurface,
                                 ),
                                 onPressed: () => obscureConfirmText.value =
                                     !obscureConfirmText.value,
                               ),
-                              errorStyle: const TextStyle(color: Colors.red),
+                              errorStyle: TextStyle(color: colorScheme.error),
                             ),
                             obscureText: obscureConfirmText.value,
                             autovalidateMode: AutovalidateMode.onUnfocus,

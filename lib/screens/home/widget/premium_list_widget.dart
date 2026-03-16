@@ -7,6 +7,7 @@ class PremiumList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final premiumItems = useState<List<int>>([1, 2, 3]);
 
     return Column(
@@ -16,10 +17,10 @@ class PremiumList extends HookWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              Icon(Icons.workspace_premium, color: Colors.amber, size: 24),
-              SizedBox(width: 6),
-              Text(
+            children: [
+              Icon(Icons.workspace_premium, color: colorScheme.tertiary, size: 24),
+              const SizedBox(width: 6),
+              const Text(
                 'Premium',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -31,9 +32,9 @@ class PremiumList extends HookWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: premiumItems.value.length,
-          separatorBuilder: (_, __) => const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Divider(height: 1, color: Colors.grey),
+          separatorBuilder: (_, __) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Divider(height: 1, color: colorScheme.outline),
           ),
           itemBuilder: (context, index) {
             final item = premiumItems.value[index];
