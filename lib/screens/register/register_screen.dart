@@ -223,11 +223,9 @@ class RegisterScreen extends HookWidget {
                                 final password = passwordController.text;
                                 final username = usernameController.text;
 
-                                final authService = AuthService();
-
-                                await callSupabaseAuthApi<AuthResponse>(
+                                await callSupabaseApi<AuthResponse>(
                                   service: () =>
-                                      authService.signUpWithEmailPassword(
+                                      AuthService().signUpWithEmailPassword(
                                         email,
                                         password,
                                         {'username': username},

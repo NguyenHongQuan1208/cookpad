@@ -16,9 +16,8 @@ class MainShell extends ConsumerWidget {
   const MainShell({super.key, required this.navigationShell});
 
   Future<void> _logout(BuildContext context) async {
-    final authService = AuthService();
-    await callSupabaseAuthApi<void>(
-      service: () => authService.signOut(),
+    await callSupabaseApi<void>(
+      service: () => AuthService().signOut(),
       context: context,
       onSuccess: (_) => context.go(Routes.signin),
       showSuccessToast: false,

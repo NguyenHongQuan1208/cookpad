@@ -146,11 +146,9 @@ class SignInScreen extends HookWidget {
                                     ?.fields['password']
                                     ?.value;
 
-                                final authService = AuthService();
-
-                                await callSupabaseAuthApi<AuthResponse>(
+                                await callSupabaseApi<AuthResponse>(
                                   context: context,
-                                  service: () => authService
+                                  service: () => AuthService()
                                       .signInWithEmailPassword(email, password),
                                   successMessage: 'Sign in successful!',
                                   onSuccess: (response) {

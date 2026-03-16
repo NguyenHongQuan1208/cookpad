@@ -3,10 +3,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cooking_pad/widget/loading_spinner_widget.dart';
 import 'package:cooking_pad/widget/toast/toast.dart';
 
-typedef SupabaseAuthService<T> = Future<T> Function();
-
-Future<void> callSupabaseAuthApi<T>({
-  required SupabaseAuthService<T> service,
+Future<void> callSupabaseApi<T>({
+  required Future<T> Function() service,
   BuildContext? context,
   VoidCallback? onPreRun,
   Function(T data)? onSuccess,
@@ -19,10 +17,8 @@ Future<void> callSupabaseAuthApi<T>({
   bool showErrorToast = true,
 }) async {
   try {
-    // Trước khi gọi API
     onPreRun?.call();
 
-    // Hiển thị loading
     if (showLoading && context != null && context.mounted) {
       showDialog(
         context: context,
@@ -31,10 +27,8 @@ Future<void> callSupabaseAuthApi<T>({
       );
     }
 
-    // Gọi service
     final result = await service();
 
-    // Success
     onSuccess?.call(result);
     if (showSuccessToast &&
         successMessage != null &&
@@ -43,8 +37,13 @@ Future<void> callSupabaseAuthApi<T>({
       SnackbarHelper.show(context, successMessage);
     }
   } catch (e) {
-    // Bắt lỗi
-    String errorMsg = e is AuthException ? e.message : e.toString();
+    final errorMsg = switch (e) {
+      AuthException(:final message) => message,
+      PostgrestException(:final message) => message,
+      StorageException(:final message) => message,
+      _ => e.toString(),
+    };
+
     onError?.call(errorMsg);
 
     if (showErrorToast && context != null && context.mounted) {
@@ -53,7 +52,6 @@ Future<void> callSupabaseAuthApi<T>({
   } finally {
     if (showLoading && context != null && context.mounted) {
       final navigator = Navigator.maybeOf(context, rootNavigator: true);
-
       if (navigator != null && navigator.canPop()) {
         navigator.pop();
       }
